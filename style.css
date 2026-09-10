@@ -1,1 +1,122 @@
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+html{
+    scroll-behavior: smooth;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    background-color: #d4edec;
+}
+.logo{
+    padding-left: 2em;
+}
+.logo-text{
+    font-size: 2em;
+}
+.menubar{
+    width: 45%;
+    margin-left: 8.5em;
+}
+.list{
+    display: flex;
+    justify-content: space-between;
+}
+.list-items a{
+    color: black;
+    font-family: sans-serif;
+    font-size: 0.9em;
+    transition: 0.4s;
+}
+.list-items a:hover{
+    color: black;
+}
+.cart{
+    padding-right: 2em;
+    position: relative;
+}
+.cart .number-of-items{
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: absolute;
+    left: 18px;
+    top: -7px;
+    background-color: #f09d51;
+    height: 20px;
+    width: 20px;
+    border-radius: 7px;
+}
+.number-of-items .noi{
+    font-size: 0.7em;
+}
+.fa-shopping-cart{
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.burger{
+    height: 28px;
+    width: 32px;
+    display: none;
+}
+.layer1, .layer2, .layer3{
+    background-color: black;
+    height: 4px;
+    margin-top: 4px;
+    width: 100%;
+    border-radius: 10px;
+}
+.section1{
+    height: calc(100vh - 10vh);
+    width: 100%;
+    background: url("images/background.jpg") center center/cover;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.section1 .banner{
+    height: 210px;
+    width: 600px;
+    background: rgba(255,255,255,0.7);
+    position: relative;
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    font-family: sans-serif;
+    z-index: 8;
+    border-radius: 15px;
+}
+.banner h1{
+    font-size: 2em;
+}
+.banner a{
+    display: flex;
+    justify-content: center;
+    padding: 1em 2.5em;
+    font-size: 0.8em;
+    color: white;
+    background: #f09d51;
+    transition: all 0.3s;
+}
+.banner a:hover{
+    background: blue;
+}
