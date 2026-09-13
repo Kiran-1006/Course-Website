@@ -1,0 +1,68 @@
+{
+    "items":[
+        {
+            "sys": {"id":"1"},
+            "fields":{
+                "title":"Python Programming Mastercourse",
+                "price": 119.99,
+                "image":{"fields":{"file":{"url":"images/python.png"}}}
+            }
+        },
+        {
+            "sys": {"id":"2"},
+            "fields":{
+                "title":"C++ Mastercourse",
+                "price": 100.99,
+                "image":{"fields":{"file":{"url":"images/c++.webp"}}}
+            }
+        },
+        {
+            "sys": {"id":"3"},
+            "fields":{
+                "title":"Web Development for Beginners",
+                "price": 99.99,
+                "image":{"fields":{"file":{"url":"images/web.jpg"}}}
+            }
+        },
+        {
+            "sys": {"id":"4"},
+            "fields":{
+                "title":"Java Programming Mastercourse",
+                "price": 149.99,
+                "image":{"fields":{"file":{"url":"images/java.jpg"}}}
+            }
+        },
+        {
+            "sys": {"id":"5"},
+            "fields":{
+                "title":"Digital Marketing Full Course",
+                "price": 129.99,
+                "image":{"fields":{"file":{"url":"images/digital.webp"}}}
+            }
+        },
+        {
+            "sys": {"id":"6"},
+            "fields":{
+                "title":"Web Designing Course",
+                "price": 199.99,
+                "image":{"fields":{"file":{"url":"images/web_design.webp"}}}
+            }
+        },
+        {
+            "sys": {"id":"7"},
+            "fields":{
+                "title":"Data Structures and Algorithms Full Course",
+                "price": 249.99,
+                "image":{"fields":{"file":{"url":"images/ds.png"}}}
+            }
+        },
+        {
+            "sys": {"id":"8"},
+            "fields":{
+                "title":"JavaScript Mastercourse",
+                "price": 99.99,
+                "image":{"fields":{"file":{"url":"images/javascript.webp"}}}
+            }
+        }
+    ]
+}
