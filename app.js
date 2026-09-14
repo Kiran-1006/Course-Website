@@ -62,7 +62,7 @@ class UI{
                                     Add to Cart
                                     </span>
                                     <div class="product-name">${product.title}</div>
-                                    <div class="product-pricing">${product.price}</div>
+                                    <div class="product-pricing">$${product.price}</div>
                                     </div>` 
         const p = document.querySelector(".products");
         p.append(productDiv);
@@ -84,7 +84,7 @@ getButton(){
             e.currentTarget.innerHTML = "In Cart"
             e.currentTarget.style.color = "white"
             e.currentTarget.style.pointerEvents = "none"
-            let carItem = {...Storage.getStorageProducts(id),'amount':1}
+            let cartItem = {...Storage.getStorageProducts(id),amount:1}
             Cart.push(cartItem)
             Storage.saveCart(Cart)
             this.setCartValues(Cart)
@@ -95,31 +95,43 @@ getButton(){
 setCartValues(cart){
     let tempTotal = 0;
     let itemsTotal = 0;
-    Cart.map((item)=> {
-        tempTotal += (item.price*item.amount),
-        itemTotal += item.amount;
+    cart.forEach((item)=> {
+        tempTotal += (item.price*item.amount);
+        itemsTotal += item.amount;
         parseFloat(tempTotal.toFixed(2))
     })
     cartItemsTotal.innerHTML = itemsTotal
     cartPriceTotal.innerHTML = parseFloat(tempTotal.toFixed(2))
 }
-addCartItem(carItem){
+addCartItem(cartItem){
     let cartItemUi = document.createElement("div")
     cartItemUi.innerHTML = `<div class = "cart-product">
-                            <div class = "product-image">
-                                <img src = "${carItem.image} alt="product">
+                                <div class = "product-image">
+                                    <img src = "${cartItem.image}" alt="product">
                                 </div>
                                 <div class = "cart-product-content">
-                                <div class = "cart-product-name"><h3>${cartItem.title}</h3></div>
-                                <div class = "cart-product-price"><h3>${cartItem.price}</h3></div>
-                                <div class = "cart-product-remove data-id="${cartItem.id}"
-                                href = "#" style="color:red;">remove</a></div>
+                                    <div class = "cart-product-name">
+                                    <h3>${cartItem.title}</h3>
                                 </div>
-                                <div class = "plus-minus">
-                                <i class = fa fa-angle-left add-amount"
-                                data-id="${cartItem.id}"></i>
-                                <span class = "number-of-item">${cartItem.amount}</span>
-                                data-id = "${cartItem.id}"</i>
+                                <div class = "cart-product-price">
+                                    <h3>$${(cartItem.price*cartItem.amount).toFixed(2)}</h3>
+                                </div>
+                                <div class = "cart-product-remove"
+                                    data-id="${cartItem.id}"
+                                    style="color:red; cursor:pointer;">
+                                    Remove
+                                </div>
+                                </div>
+                                    <div class = "plus-minus">
+                                    <i class = "fa fa-angle-left reduce-amount"
+                                        data-id="${cartItem.id}">
+                                    </i>
+                                    <span class = "number-of-item">
+                                        ${cartItem.amount}
+                                    </span>
+                                    <i class="fa fa-angle-right add-amount" 
+                                        data-id = "${cartItem.id}">
+                                    </i>
                                 </div>
                                 </div>`
                                 cartContent.append(cartItemUi)
@@ -134,22 +146,23 @@ addCartItem(carItem){
             }
             cartLogic(){
                 clearBtn.addEventListener("click",()=>{
-                    this.closeCart()
+                    this.clearCart()
                 })
             cartContent.addEventListener("click",(event)=>{
-                if(event.target.classList.contains("cart-product-remove")){
-                    let id = event.target.dataset.id
-                    this.removeItem(id)
-                    let div = event.target.parentElement.parentElement.parentElement.parentElement
-                    div.removeChild(event.target.parentElement.parentElement.parentElement.parentElement)
-                }
-                else if(event.target.classList.contains("add-amount")){
+                if(event.target.classList.contains("add-amount")){
                     let id = event.target.dataset.id
                     let item = Cart.find((item)=>item.id===id)
                     item.amount++
                     Storage.saveCart(Cart)
                     this.setCartValues(Cart)
-                    event.target.nextElementSibling.innerHTML = item.amount
+                    event.target.previousElementSibling.innerHTML = item.amount
+                    const price =
+                    event.target
+                    .parentElement
+                    .parentElement
+                    .querySelector(".cart-product-price h3");
+                     price.innerHTML = `$${(item.price).toFixed(2)}`;
+                    
                 }
                 else if(event.target.classList.contains("reduce-amount")){
                     let id = event.target.dataset.id
@@ -158,54 +171,29 @@ addCartItem(carItem){
                         item.amount--
                         Storage.saveCart(Cart)
                         this.setCartValues(Cart)
-                        event.target.previousElementSibling.innerHTML = item.amount
-                    }
-                    else{
+                        event.target.nextElementSibling.innerHTML = item.amount
+                        const price =
+                            event.target
+                            .parentElement
+                            .parentElement
+                            .querySelector(".cart-product-price h3");
+
+                        price.innerHTML = `$${(item.price).toFixed(2)}`;
+                } else {
                         this.removeItem(id)
-                        let div = event.target.parentElement.parentElement.parentElement.parentElement
-                        div.removeChild(event.target.parentElement.parentElement.parentElement.parentElement)
+                        event.target.closest('.cart-product')                        
+                        .remove();
                     }
                 }
+                // Remove
+                else if (event.target.classList.contains("cart-product-remove")) {
+                    let id = event.target.dataset.id;
+                    this.removeItem(id);
+                    event.target
+                        .closest(".cart-product")
+                        .remove();
+                }
             })
-            }
-            addAmount(){
-                const addBtn = document.querySelectorAll(".add-amount")
-                addBtn.forEach((btn)=>{
-                    btn.addEventListener("click",(event)=>{
-                        let id = (event.currentTarget.dataset.id)
-                        Cart.map((item)=>{
-                            if(item.id===id){
-                                item.amount++
-                                Storage.saveCart(Cart)
-                                this.setCartValues(Cart)
-                                const amountUi = event.currentTarget.parentElement.children[1]
-                                amountUi.innerHTML = item.amount
-                            }
-                        })
-                    })
-                })
-            }
-            reduceAmount(){
-                const reduceBtn = document.querySelectorAll(".reduce-amount")
-                reduceBtn.forEach((btn)=>{
-                    btn.addEventListener("click",(event)=>{
-                        let id = (event.currentTarget.dataset.id)
-                        Cart.map((item)=>{
-                            if(item.id===id){
-                                item.amount--
-                                if(item.amount>0){
-                                    Storage.saveCart(Cart)
-                                    this.setCartValues(Cart)
-                                    const amountUi = event.currentTarget.parentElement.children[1]
-                                    amountUi.innerHTML = item.amount
-                                }else{
-                                    event.currentTarget.parentElement.parentElement.parentElement.removeChild(event.currentTarget.parentElement.parentElement)
-                                    this.removeItem(id)
-                                }
-                            }
-                        })
-                    })
-                })
             }
             clearCart(){
                 let cartItem = Cart.map(item=>item.id)
@@ -223,7 +211,7 @@ addCartItem(carItem){
                 Storage.saveCart(Cart)
                 let button = this.getSingleButton(id)
                 button.style.pointerEvents = "unset"
-                button.innerHTML = `<i class = "fa fa-cart-plus"></i>Add To Cart`
+                button.innerHTML = `<i class = "fa fa-cart-plus fa-1x"></i>Add To Cart`
             }
             getSingleButton(id){
                 let btn
@@ -259,7 +247,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         ui.displayProducts(products)
         Storage.saveProducts(products)
     }).then(()=>{
-        ui.getButtons();
+        ui.getButton();
         ui.cartLogic();
     })
 })
