@@ -47,6 +47,13 @@ ul{
     padding-right: 2em;
     position: relative;
 }
+.cart h2{
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1em;
+    font-size: 1.1em;
+    font-family: Verdana;
+}
 .cart .number-of-items{
     display: flex;
     cursor: pointer;
@@ -83,7 +90,7 @@ ul{
 .section1{
     height: calc(100vh - 10vh);
     width: 100%;
-    background: url("images/background.jpg") center center/cover;
+    background: url("images/back1.jpg") center center/cover;
     top: 0;
     left: 0;
     z-index: -1;
@@ -120,6 +127,60 @@ ul{
 .banner a:hover{
     background: blue;
 }
+.section2.title{
+    text-align: center;
+}
+.section2 .title h1{
+    font-size: 1.8em;
+    margin: 1.3em;
+}
+.products{
+    margin: 30px auto;
+    max-width: 1300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+.product-card{
+    text-align: center;
+    position: relative;
+    max-width: 350px;
+    overflow: hidden;
+}
+.product-card img{
+    height: 300px;
+    width: 300px;
+    transition: 0.3s linear;
+}
+.product-name,.product-pricing{
+    margin: 0.3em;
+}
+.product-pricing{
+    color:#f09d51;
+} 
+.add-to-cart{
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 0.2em 1em;
+    height: 30.px;
+    background: #f09d51;
+    position: absolute;
+    right: 0;
+    transform: translateX(100%);
+    bottom: 80px;
+    transition: 0.3s linear;
+    cursor: pointer;
+}
+.product-card:hover .add-to-cart{
+    transform: translateX(0%);
+}
+.product-card:hover img{
+    opacity: 0.7;
+}
+.add-to-cart:hover{
+    color: black;
+}
 /*Menubar*/
 .menu-sidebar{
     display: none;
@@ -131,10 +192,10 @@ ul{
     top: 0;
     width: 450px;
     height: 100vh;
-    z-index: 10;
+    z-index: 1000;
     transition: all 0.3s linear;
     transform: translateX(100%);
-    overflow: scroll;
+    overflow-y: auto;
 }
 .cart-sidebar .cart{
     padding: 0;
@@ -147,31 +208,48 @@ ul{
 .fa-times{
     margin-top: 0.5em;
 }
-cart h2{
-    text-align: center;
-    width: 100%;
-    margin-bottom: 1em;
-    font-size: 1.1em;
-    font-family: Verdana;
+.cart-product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: 20px auto;
+    gap: 20px;
 }
 .cart-product .product-image img{
-    width: 130px;
+    width: 100%;
     height: 90px;
+    object-fit: cover;
+    display: block;
 }
 .cart-product-content{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    margin-left: 1em;
-    height: 80px;
+    margin-left: 0;
+    height: 90%;
+    flex: 1;
+    gap: 8px;
 }
 .plus-minus{
     display: flex;
-    transform: rotate(90deg);
     color: #f09d51;
     font-size: 1.5em;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
     cursor: pointer;
+    transform: rotate(90deg);
+}
+.plus-minus i{
+    cursor: pointer;
+}
+.plus-minus .number-of-item {
+    font-size: 18px;
+    color: black;
+    min-width: 25px;
+    text-align: center;
 }
 .total-sum{
     text-align: center;
