@@ -90,7 +90,7 @@ ul{
 .section1{
     height: calc(100vh - 10vh);
     width: 100%;
-    background: url("images/back1.jpg") center center/cover;
+    background: url("images/background.jpg") center center/cover;
     top: 0;
     left: 0;
     z-index: -1;
